@@ -3,9 +3,10 @@ import { useState } from "react";
 function App() {
   const [search, setSearch] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [cocktails, setCocktails] = useState([]);
 
   function handleSearch(e) {
-    e.preventDefault;
+    e.preventDefault();
     setSearch(e.target.value);
   }
 
@@ -14,6 +15,24 @@ function App() {
       !ingredients.includes(search.trim()) &&
         setIngredients([...ingredients, search.trim()]);
       setSearch("");
+
+      const fetchData = async () => {
+        const ingredientString = [
+          ...ingredients,
+          search.trim(),
+        ].join(",");
+        const res = await fetch(
+          `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredientString}`,
+          {
+            headers: {
+              "X-Api-Key": import.meta.env.VITE_API_KEY,
+            },
+          }
+        );
+        const data = await res.json();
+        setCocktails(data);
+      };
+      fetchData();
     }
   }
 
@@ -32,6 +51,13 @@ function App() {
         Ingredients:
         {ingredients}
       </p>
+      <div>
+        <h1 className="mt-5 font-bold">Cocktails:</h1>
+        <p>
+          {cocktails.length > 0 &&
+            cocktails.map((c) => c.name)}
+        </p>
+      </div>
     </>
   );
 }
