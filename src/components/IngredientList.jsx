@@ -1,9 +1,9 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-function App() {
+function IngredientList({ setCocktails }) {
   const [search, setSearch] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [cocktails, setCocktails] = useState([]);
 
   function handleSearch(e) {
     e.preventDefault();
@@ -47,19 +47,18 @@ function App() {
         onKeyDown={handleKeyDown}
         className="bg-lime-400"
       ></input>
-      <p>
-        Ingredients:
-        {ingredients}
-      </p>
+      <h1 className="mt-5 font-bold">Ingredients:</h1>
       <div>
-        <h1 className="mt-5 font-bold">Cocktails:</h1>
-        <p>
-          {cocktails.length > 0 &&
-            cocktails.map((c) => c.name)}
-        </p>
+        {ingredients.map((ing) => (
+          <p key={ing}>{ing}</p>
+        ))}
       </div>
     </>
   );
 }
 
-export default App;
+IngredientList.propTypes = {
+  setCocktails: PropTypes.func,
+};
+
+export default IngredientList;
