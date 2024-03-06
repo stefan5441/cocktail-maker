@@ -4,11 +4,21 @@ import IngredientList from "./IngredientList";
 
 function App() {
   const [cocktails, setCocktails] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
     <>
-      <IngredientList setCocktails={setCocktails} />
-      <CocktailList cocktails={cocktails} />
+      <IngredientList
+        setCocktails={setCocktails}
+        setLoading={setLoading}
+        setError={setError}
+      />
+      <CocktailList
+        cocktails={cocktails}
+        loading={loading}
+        error={error}
+      />
     </>
   );
 }

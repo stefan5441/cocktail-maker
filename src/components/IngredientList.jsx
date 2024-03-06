@@ -1,7 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-function IngredientList({ setCocktails }) {
+function IngredientList({
+  setCocktails,
+  setLoading,
+  setError,
+}) {
   const [search, setSearch] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
@@ -17,20 +21,34 @@ function IngredientList({ setCocktails }) {
       setSearch("");
 
       const fetchData = async () => {
-        const ingredientString = [
-          ...ingredients,
-          search.trim(),
-        ].join(",");
-        const res = await fetch(
-          `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredientString}`,
-          {
-            headers: {
-              "X-Api-Key": import.meta.env.VITE_API_KEY,
-            },
+        try {
+          setLoading(true);
+          const ingredientString = [
+            ...ingredients,
+            search.trim(),
+          ].join(",");
+          const res = await fetch(
+            `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredientString}`,
+            {
+              headers: {
+                "X-Api-Key": import.meta.env.VITE_API_KEY,
+              },
+            }
+          );
+          if (!res.ok) {
+            throw new Error(
+              `HTTP error! status: ${res.status}`
+            );
           }
-        );
-        const data = await res.json();
-        setCocktails(data);
+          const data = await res.json();
+          setCocktails(data);
+          setError(false);
+        } catch (err) {
+          console.log("Got inside catch");
+          setError(true);
+        } finally {
+          setLoading(false);
+        }
       };
       fetchData();
     }
@@ -59,6 +77,8 @@ function IngredientList({ setCocktails }) {
 
 IngredientList.propTypes = {
   setCocktails: PropTypes.func,
+  setLoading: PropTypes.func,
+  setError: PropTypes.func,
 };
 
 export default IngredientList;
