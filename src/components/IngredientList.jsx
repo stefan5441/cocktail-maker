@@ -1,84 +1,92 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 function IngredientList({
   setCocktails,
+  setIngredients,
+  ingredients,
   setLoading,
   setError,
 }) {
   const [search, setSearch] = useState("");
-  const [ingredients, setIngredients] = useState([]);
 
-  function handleSearch(e) {
-    e.preventDefault();
+  async function fetchData() {
+    try {
+      setLoading(true);
+      const ingredientString = [
+        ...ingredients,
+        search.trim(),
+      ].join(",");
+      const res = await fetch(
+        `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredientString}`,
+        {
+          headers: {
+            "X-Api-Key": import.meta.env.VITE_API_KEY,
+          },
+        }
+      );
+      if (!res.ok) {
+        throw new Error(
+          `HTTP error! status: ${res.status}`
+        );
+      }
+      const data = await res.json();
+      setCocktails(data);
+      setError(false);
+    } catch (err) {
+      console.error(
+        "Error occurred while fetching data:",
+        err
+      );
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSearchChange(e) {
     setSearch(e.target.value);
   }
 
   function handleKeyDown(e) {
     if (e.key === "Enter") {
-      !ingredients.includes(search.trim()) &&
-        setIngredients([...ingredients, search.trim()]);
+      const trimmedSearch = search.trim();
+      if (!ingredients.includes(trimmedSearch)) {
+        setIngredients([...ingredients, trimmedSearch]);
+      }
       setSearch("");
-
-      const fetchData = async () => {
-        try {
-          setLoading(true);
-          const ingredientString = [
-            ...ingredients,
-            search.trim(),
-          ].join(",");
-          const res = await fetch(
-            `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredientString}`,
-            {
-              headers: {
-                "X-Api-Key": import.meta.env.VITE_API_KEY,
-              },
-            }
-          );
-          if (!res.ok) {
-            throw new Error(
-              `HTTP error! status: ${res.status}`
-            );
-          }
-          const data = await res.json();
-          setCocktails(data);
-          setError(false);
-        } catch (err) {
-          console.log("Got inside catch");
-          setError(true);
-        } finally {
-          setLoading(false);
-        }
-      };
       fetchData();
     }
   }
 
   return (
-    <>
-      <label htmlFor="search">Add ingredient</label>
+    <div>
       <input
+        className="shadow-xl caret-slate-900 px-2 py-1 text-md shadow-slate-950/30 w-80 focus:outline-none focus:border focus:border-slate-950/20"
         type="text"
         id="search"
         value={search}
-        onChange={handleSearch}
+        onChange={handleSearchChange}
         onKeyDown={handleKeyDown}
-        className="bg-lime-400"
-      ></input>
-      <h1 className="mt-5 font-bold">Ingredients:</h1>
-      <div>
+        placeholder="Add ingredient..."
+      />
+      <div className="mt-6">
         {ingredients.map((ing) => (
-          <p key={ing}>{ing}</p>
+          <p key={ing} className="ml-2 my-1">
+            {ing}
+          </p>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
 IngredientList.propTypes = {
-  setCocktails: PropTypes.func,
-  setLoading: PropTypes.func,
-  setError: PropTypes.func,
+  setCocktails: PropTypes.func.isRequired,
+  setIngredients: PropTypes.func.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.string),
+  setLoading: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
 };
 
 export default IngredientList;

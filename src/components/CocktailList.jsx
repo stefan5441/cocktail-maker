@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 
-function CocktailList({ cocktails, loading, error }) {
-  console.log("Error: ", error);
-
+function CocktailList({
+  cocktails,
+  ingredients,
+  loading,
+  error,
+}) {
   return (
     <div>
-      <h1 className="mt-5 font-bold">Cocktails:</h1>
+      <h1>Cocktails:</h1>
       <div>
         {error ? (
           <p>
@@ -14,9 +17,10 @@ function CocktailList({ cocktails, loading, error }) {
           </p>
         ) : loading ? (
           <p>Loading...</p>
-        ) : cocktails.length === 0 ? (
+        ) : cocktails.length === 0 &&
+          ingredients.length !== 0 ? (
           <p>
-            There is no cocktails with these ingredients,
+            There are no cocktails with these ingredients,
             please try other ones!
           </p>
         ) : (
@@ -30,14 +34,14 @@ function CocktailList({ cocktails, loading, error }) {
 CocktailList.propTypes = {
   cocktails: PropTypes.arrayOf(
     PropTypes.shape({
-      ingredients: PropTypes.array,
+      ingredients: PropTypes.arrayOf(PropTypes.string),
       instructions: PropTypes.string,
       name: PropTypes.string,
-      map: PropTypes.func,
     })
-  ),
-  loading: PropTypes.bool,
-  error: PropTypes.bool,
+  ).isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.string),
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 export default CocktailList;
