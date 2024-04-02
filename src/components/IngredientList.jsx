@@ -10,13 +10,14 @@ function IngredientList({
 }) {
   const [search, setSearch] = useState("");
 
-  async function fetchData() {
+  async function fetchData(updatedIngredients) {
     try {
+      if (updatedIngredients.length === 0){
+        setCocktails([]);
+        return;
+      }
       setLoading(true);
-      const ingredientString = [
-        ...ingredients,
-        search.trim(),
-      ].join(",");
+      const ingredientString = [...updatedIngredients].join(",");
       const res = await fetch(
         `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredientString}`,
         {
@@ -26,23 +27,19 @@ function IngredientList({
         }
       );
       if (!res.ok) {
-        throw new Error(
-          `HTTP error! status: ${res.status}`
-        );
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
       const data = await res.json();
       setCocktails(data);
       setError(false);
     } catch (err) {
-      console.error(
-        "Error occurred while fetching data:",
-        err
-      );
+      console.error("Error occurred while fetching data:", err);
       setError(true);
     } finally {
       setLoading(false);
     }
   }
+
 
   function handleSearchChange(e) {
     setSearch(e.target.value);
@@ -55,8 +52,18 @@ function IngredientList({
         setIngredients([...ingredients, trimmedSearch]);
       }
       setSearch("");
-      fetchData();
+      fetchData([...ingredients, trimmedSearch]);
     }
+  }
+    
+  function removeIngredient(ingredient) {
+    setIngredients((prevIngredients) => {
+      const updatedIngredients = prevIngredients.filter(
+        (ing) => ing !== ingredient
+      );
+      fetchData(updatedIngredients);
+      return updatedIngredients;
+    });
   }
 
   return (
@@ -72,8 +79,8 @@ function IngredientList({
       />
       <div className="mt-6">
         {ingredients.map((ing) => (
-          <p key={ing} className="ml-2 my-1">
-            {ing}
+          <p key={ing} className="ml-2 my-1 flex flex-row justify-between">
+            {ing} <button onClick={() => removeIngredient(ing)}> &#10006;</button>
           </p>
         ))}
       </div>
