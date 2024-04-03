@@ -7,6 +7,7 @@ function IngredientList({
   ingredients,
   setLoading,
   setError,
+  setSelectedCocktail
 }) {
   const [search, setSearch] = useState("");
 
@@ -14,6 +15,7 @@ function IngredientList({
     try {
       if (updatedIngredients.length === 0){
         setCocktails([]);
+        setSelectedCocktail({});
         return;
       }
       setLoading(true);
@@ -67,7 +69,7 @@ function IngredientList({
   }
 
   return (
-    <div>
+    <div className="grid grid-col-1 justify-center mt-6">
       <input
         className="shadow-xl caret-slate-900 px-2 py-1 text-md shadow-slate-950/30 w-80 focus:outline-none focus:border focus:border-slate-950/20"
         type="text"
@@ -77,10 +79,10 @@ function IngredientList({
         onKeyDown={handleKeyDown}
         placeholder="Add ingredient..."
       />
-      <div className="mt-6">
+      <div className="mt-6 h-48 overflow-auto">
         {ingredients.map((ing) => (
           <p key={ing} className="ml-2 my-1 flex flex-row justify-between">
-            {ing} <button onClick={() => removeIngredient(ing)}> &#10006;</button>
+            {ing} <button className="mr-2" onClick={() => removeIngredient(ing)}>&#10006;</button>
           </p>
         ))}
       </div>
@@ -94,6 +96,7 @@ IngredientList.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string),
   setLoading: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
+  setSelectedCocktail: PropTypes.func.isRequired,
 };
 
 export default IngredientList;
