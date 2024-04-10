@@ -15,35 +15,30 @@ function App() {
   }
 
   return (
-    <div className="bg-slate-50 w-full h-full">
-      <div className="h-12 bg-slate-400 flex items-center">
-        <p className="container mx-auto text-2xl font-light text-slate-50">
+    <div className="h-full">
+      <div className="bg-green-200 h-[8.3333335%] flex items-center">
+        <p className="px-10 text-2xl">
           Cocktail Maker
         </p>
       </div>
 
-      <Cocktail 
-        selectedCocktail={selectedCocktail}
-      /> 
-
-      <div className="h-24 flex justify-center items-center mt-10">
-        <h1 className="text-4xl text-center font-thin mt-10">
-          <span className="text-slate-600 font-normal">
-            Sip, Stir, Shake:&nbsp;
-          </span>
-          Elevate Your Mixology Game&nbsp;
-          <br />
-          with Every Cocktail Tale!
+      <div className="bg-blue-200 h-1/6">
+        <h1 className="text-4xl font-semibold p-10">
+          <div>Sip, Stir, Shake:&nbsp;</div>
+          <div className="font-normal">Elevate Your Mixology Game with Every Cocktail Tale!</div>
         </h1>
       </div>
 
-      <div className="container text-xl mx-auto mt-24">
+      <div className="flex h-4/6">
+
         <CocktailList
           cocktails={cocktails}
           ingredients={ingredients}
           loading={loading}
           error={error}
           selectCocktail={selectCocktail}
+          selectedCocktail={selectedCocktail}
+          setSelectedCocktail={setSelectedCocktail}
         />
         
         <IngredientList
@@ -56,6 +51,11 @@ function App() {
         />
       </div>
 
+      <div className="bg-green-200 h-[8.3333335%] flex items-center">
+        <p className="px-10 text-2xl">
+          Cocktail Maker
+        </p>
+      </div>
     </div>
   );
 }

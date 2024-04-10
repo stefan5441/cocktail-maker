@@ -7,13 +7,13 @@ function IngredientList({
   ingredients,
   setLoading,
   setError,
-  setSelectedCocktail
+  setSelectedCocktail,
 }) {
   const [search, setSearch] = useState("");
 
   async function fetchData(updatedIngredients) {
     try {
-      if (updatedIngredients.length === 0){
+      if (updatedIngredients.length === 0) {
         setCocktails([]);
         setSelectedCocktail({});
         return;
@@ -26,7 +26,7 @@ function IngredientList({
           headers: {
             "X-Api-Key": import.meta.env.VITE_API_KEY,
           },
-        }
+        },
       );
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -42,7 +42,6 @@ function IngredientList({
     }
   }
 
-
   function handleSearchChange(e) {
     setSearch(e.target.value);
   }
@@ -57,11 +56,11 @@ function IngredientList({
       fetchData([...ingredients, trimmedSearch]);
     }
   }
-    
+
   function removeIngredient(ingredient) {
     setIngredients((prevIngredients) => {
       const updatedIngredients = prevIngredients.filter(
-        (ing) => ing !== ingredient
+        (ing) => ing !== ingredient,
       );
       fetchData(updatedIngredients);
       return updatedIngredients;
@@ -69,9 +68,11 @@ function IngredientList({
   }
 
   return (
-    <div className="grid grid-col-1 justify-center mt-6">
+    <div className="w-1/3 bg-orange-200 p-10">
+      <h1 className="text-3xl font-medium">Ingredients</h1>
+
       <input
-        className="shadow-xl caret-slate-900 px-2 py-1 text-md shadow-slate-950/30 w-80 focus:outline-none focus:border focus:border-slate-950/20"
+        className="mt-8 ml-1 w-full h-7 pl-2 focus:ring-4 focus:ring-blue-200"
         type="text"
         id="search"
         value={search}
@@ -79,11 +80,17 @@ function IngredientList({
         onKeyDown={handleKeyDown}
         placeholder="Add ingredient..."
       />
-      <div className="mt-6 h-48 overflow-auto">
+
+      <div className="mt-4 flex flex-wrap">
         {ingredients.map((ing) => (
-          <p key={ing} className="ml-2 my-1 flex flex-row justify-between">
-            {ing} <button className="mr-2" onClick={() => removeIngredient(ing)}>&#10006;</button>
-          </p>
+          <button onClick={() => removeIngredient(ing)}>
+            <p
+              className="bg-yellow-200 px-2 mx-2 mb-4 text-lg hover:bg-blue-200"
+              key={ing}
+            >
+              {ing} <span>&#10006;</span>
+            </p>
+          </button>
         ))}
       </div>
     </div>

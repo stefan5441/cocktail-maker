@@ -1,16 +1,19 @@
 import PropTypes from "prop-types";
 
-function Cocktail({ selectedCocktail }) {
+function Cocktail({ selectedCocktail, setSelectedCocktail }) {
   
   return (<>
       {
         selectedCocktail && 
-        <div className="hidden">
-          <p>{selectedCocktail.name}</p>
-          <div>
-            {selectedCocktail.ingredients && selectedCocktail.ingredients.map(ing => <p key={ing}>{ing}</p>)}
+        <div className="flex mt-8 justify-between h-full">
+          <div className="flex flex-col gap-8 text-2xl">
+            <p className="capitalize font-medium mb-2">{selectedCocktail.name}</p>
+            <div>
+              {selectedCocktail.ingredients && selectedCocktail.ingredients.map(ing => <p key={ing}>{ing}</p>)}
+            </div>
+            <p className="w-4/5">{selectedCocktail.instructions}</p>
           </div>
-          <p>{selectedCocktail.instructions}</p>
+          <button className="self-start bg-orange-200 px-2 hover:bg-blue-300" onClick={() => setSelectedCocktail({})}>&#10006;</button>
         </div>
       }
     </>);
