@@ -2,8 +2,8 @@
 
 Welcome to Cocktail Composer! This project is designed to help you discover cocktails based on the ingredients you have on hand. Simply input your ingredients, and the app will fetch cocktails that contain those ingredients.
 
-![Desktop Preview](https://github.com/stefan5441/cocktail-maker/blob/main/public/preview/cocktail-maker-desktop.png)
-![Mobile Preview](https://github.com/stefan5441/cocktail-maker/blob/main/public/preview/cocktail-maker-mobile.png)
+[Desktop Preview](https://github.com/stefan5441/cocktail-maker/blob/main/public/preview/cocktail-maker-desktop.png)
+[Mobile Preview](https://github.com/stefan5441/cocktail-maker/blob/main/public/preview/cocktail-maker-mobile.png)
 
 ## Demo
 
