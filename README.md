@@ -1,8 +1,32 @@
-# React + Vite
+# Cocktail Composer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to Cocktail Composer! This project is designed to help you discover cocktails based on the ingredients you have on hand. Simply input your ingredients, and the app will fetch cocktails that contain those ingredients.
 
-Currently, two official plugins are available:
+![Desktop Preview](path_to_desktop_image)
+![Mobile Preview](path_to_mobile_image)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
+
+You can view a live demo of the project [here](https://cocktailcomposer.netlify.app/).
+
+## Technologies Used
+
+- Vite
+- React
+- Tailwind CSS
+
+## How to Use
+
+1. Input the ingredients you have in the provided text field.
+2. Click on the "Search" button.
+3. Browse through the list of cocktails that you can make with the provided ingredients.
+
+## Cloning the Project
+
+To clone the project to your local machine, follow these steps:
+
+1. Make sure you have Git installed on your system.
+2. Open your terminal.
+3. Navigate to the directory where you want to clone the project.
+4. Run the following command:
+
