@@ -2,8 +2,8 @@
 
 Welcome to Cocktail Composer! This project is designed to help you discover cocktails based on the ingredients you have on hand. Simply input your ingredients, and the app will fetch cocktails that contain those ingredients.
 
-![Desktop Preview](path_to_desktop_image)
-![Mobile Preview](path_to_mobile_image)
+![Desktop Preview](https://github.com/stefan5441/cocktail-maker/blob/main/public/preview/cocktail-maker-desktop.png)
+![Mobile Preview](https://github.com/stefan5441/cocktail-maker/blob/main/public/preview/cocktail-maker-mobile.png)
 
 ## Demo
 
@@ -18,8 +18,8 @@ You can view a live demo of the project [here](https://cocktailcomposer.netlify.
 ## How to Use
 
 1. Input the ingredients you have in the provided text field.
-2. Click on the "Search" button.
-3. Browse through the list of cocktails that you can make with the provided ingredients.
+2. Click on the cocktail that suits your liking.
+3. Sip, Stir, Shake!
 
 ## Cloning the Project
 
