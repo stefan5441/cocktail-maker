@@ -68,11 +68,11 @@ function IngredientList({
   }
 
   return (
-    <div className="w-1/3 bg-orange-200 p-10">
-      <h1 className="text-3xl font-medium">Ingredients</h1>
+    <div className="md:w-1/3 bg-orange-200 p-10 w-full h-2/5 md:h-full lg:overflow-hidden overflow-scroll">
+      <h1 className="lg:text-3xl md:text-2xl text-xl font-medium">Ingredients</h1>
 
       <input
-        className="mt-8 ml-1 w-full h-7 pl-2 focus:ring-4 focus:ring-blue-200"
+        className="md:mt-8 mt-4 ml-1 w-full h-7 pl-2 focus:ring-4 focus:ring-blue-200"
         type="text"
         id="search"
         value={search}
@@ -83,10 +83,9 @@ function IngredientList({
 
       <div className="mt-4 flex flex-wrap">
         {ingredients.map((ing) => (
-          <button onClick={() => removeIngredient(ing)}>
+          <button onClick={() => removeIngredient(ing)} key={ing}>
             <p
-              className="bg-yellow-200 px-2 mx-2 mb-4 text-lg hover:bg-blue-200"
-              key={ing}
+              className="bg-yellow-200 lg:px-2 lg:mx-2 lg:mb-4 text-lg px-1 mx-1 mb-2 hover:bg-blue-200"
             >
               {ing} <span>&#10006;</span>
             </p>

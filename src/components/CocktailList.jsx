@@ -12,8 +12,8 @@ function CocktailList({
   setSelectedCocktail
 }) {
   return (
-    <div className="w-2/3 bg-yellow-200 p-10 flex flex-col">
-      <h1 className="text-3xl font-medium">Cocktails</h1>
+    <div className="md:w-2/3 bg-yellow-200 p-10 flex flex-col w-full h-3/5 md:h-full">
+      <h1 className="lg:text-3xl md:text-2xl text-xl font-medium">Cocktails</h1>
 
       {Object.keys(selectedCocktail).length !== 0 ? (
         <Cocktail selectedCocktail={selectedCocktail} setSelectedCocktail={setSelectedCocktail} />
@@ -31,7 +31,7 @@ function CocktailList({
               ones!
             </p>
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="md:flex md:flex-col md:gap-4 grid grid-cols-2 gap-4">
               {cocktails.map((c) => (
                 <button
                   className="bg-orange-200 text-lg hover:bg-blue-200"

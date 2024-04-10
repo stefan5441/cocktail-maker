@@ -22,14 +22,14 @@ function App() {
         </p>
       </div>
 
-      <div className="bg-blue-200 h-1/6">
-        <h1 className="text-4xl font-semibold p-10">
+      <div className="bg-blue-200 md:h-1/6 hidden md:block">
+        <h1 className="xl:text-4xl md:text-xl font-semibold p-10">
           <div>Sip, Stir, Shake:&nbsp;</div>
           <div className="font-normal">Elevate Your Mixology Game with Every Cocktail Tale!</div>
         </h1>
       </div>
 
-      <div className="flex h-4/6">
+      <div className="flex flex-col md:flex-row md:h-4/6 h-5/6">
 
         <CocktailList
           cocktails={cocktails}

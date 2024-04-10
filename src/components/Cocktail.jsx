@@ -5,8 +5,8 @@ function Cocktail({ selectedCocktail, setSelectedCocktail }) {
   return (<>
       {
         selectedCocktail && 
-        <div className="flex mt-8 justify-between h-full">
-          <div className="flex flex-col gap-8 text-2xl">
+        <div className="flex mt-8 justify-between h-full overflow-scroll lg:overflow-hidden">
+          <div className="flex flex-col md:gap-8 xl:text-2xl lg:text-xl md:text-lg sm:text-sm gap-4">
             <p className="capitalize font-medium mb-2">{selectedCocktail.name}</p>
             <div>
               {selectedCocktail.ingredients && selectedCocktail.ingredients.map(ing => <p key={ing}>{ing}</p>)}
