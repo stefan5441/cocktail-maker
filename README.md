@@ -30,4 +30,12 @@ To clone the project to your local machine, follow these steps:
 2. Open your terminal.
 3. Navigate to the directory where you want to clone the project.
 4. Run the following command:
+- git clone https://github.com/stefan5441/cocktail-maker.git
+- cd cocktail-maker
+- npm install
+- npm run dev
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
